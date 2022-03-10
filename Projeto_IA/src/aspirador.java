@@ -5,11 +5,6 @@ import java.util.Scanner;
 public class aspirador {
 
     public static int aresta, Mapa[][], posicaoX, posicaoY, direcao, posicaoXInicial, posicaoYInicial;
-    public static String msg;
-    public static long bgn, end, time;
-
-    //Criando codes de cor
-    public static String y = "\u001B[33m", w = "\u001B[0m", c = "\u001B[36m", p = "\u001B[35m";
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner input = new Scanner(System.in);
@@ -22,8 +17,7 @@ public class aspirador {
         }
         aresta = input.nextInt();
         Mapa = new int[aresta][aresta];
-        //System.out.print(y + "\n[ 1 ] <- piso sujo\n[ 0 ] <- piso limpo\n" + w);
-
+        
         //preenchendo a área com pisos sujos e limpos
         for (int i = 0; i < aresta; i++) {
             for (int j = 0; j < aresta; j++) {
@@ -80,11 +74,11 @@ public class aspirador {
         for (int i = 0; i < aresta; i++){
             for (int j = 0; j < aresta; j++) {
                 if((posicaoX == i) && (posicaoY == j)){
-                    System.out.print(p + "[:" + Mapa[i][j] + ":]" + w);
+                    System.out.print("[:" + Mapa[i][j] + ":]");
                 } else if(Mapa[i][j] == 0){
-                    System.out.print("[ " + c + Mapa[i][j] + w + " ]");
+                    System.out.print("[ " + Mapa[i][j] + " ]");
                 } else {
-                    System.out.print("[ " + y + Mapa[i][j] + w + " ]");
+                    System.out.print("[ " + Mapa[i][j] + " ]");
                 }
             }
             System.out.println();
@@ -126,8 +120,6 @@ public class aspirador {
             System.out.println("Limpo");
         }
     }
-
-    
 
     //Retorna para origem
     public static void retornaOrigem(int x, int y) throws IOException, InterruptedException {
