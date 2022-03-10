@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class aspirador {
 
-    public static int aresta, matriz[][], posicaoX, posicaoY, direcao, posicaoXInicial, posicaoYInicial;
+    public static int aresta, Mapa[][], posicaoX, posicaoY, direcao, posicaoXInicial, posicaoYInicial;
     public static String msg;
     public static long bgn, end, time;
 
@@ -21,13 +21,13 @@ public class aspirador {
             input.next();
         }
         aresta = input.nextInt();
-        matriz = new int[aresta][aresta];
+        Mapa = new int[aresta][aresta];
         //System.out.print(y + "\n[ 1 ] <- piso sujo\n[ 0 ] <- piso limpo\n" + w);
 
         //preenchendo a área com pisos sujos e limpos
         for (int i = 0; i < aresta; i++) {
             for (int j = 0; j < aresta; j++) {
-                matriz[i][j] = aleatorio.nextInt(2);
+                Mapa[i][j] = aleatorio.nextInt(2);
             }
         }
 
@@ -38,7 +38,7 @@ public class aspirador {
         posicaoYInicial = posicaoY;
 
         //Iniciação da limpeza
-        desenhandoMatriz();
+        desenhandoMapa();
         System.out.println("Start");
 
         posicionaAspirador();
@@ -51,7 +51,7 @@ public class aspirador {
                 if((posicaoY == 0) && (direcao == 0) || (posicaoY == aresta-1) && (direcao == 1)){
                     //aspirador desce 1 posição
                     posicaoX++;
-                    desenhandoMatriz();
+                    desenhandoMapa();
                     limpaPiso(posicaoX, posicaoY);
                     //inverte direção
                     if(direcao == 1){
@@ -65,7 +65,7 @@ public class aspirador {
                     } else {
                         posicaoY--;
                     }
-                    desenhandoMatriz();
+                    desenhandoMapa();
                     limpaPiso(posicaoX, posicaoY);
                 }
             }
@@ -75,16 +75,16 @@ public class aspirador {
     }
 
     //Desenhando a sala
-    public static void desenhandoMatriz() throws IOException, InterruptedException {
+    public static void desenhandoMapa() throws IOException, InterruptedException {
         System.out.println("\t");
         for (int i = 0; i < aresta; i++){
             for (int j = 0; j < aresta; j++) {
                 if((posicaoX == i) && (posicaoY == j)){
-                    System.out.print(p + "[:" + matriz[i][j] + ":]" + w);
-                } else if(matriz[i][j] == 0){
-                    System.out.print("[ " + c + matriz[i][j] + w + " ]");
+                    System.out.print(p + "[:" + Mapa[i][j] + ":]" + w);
+                } else if(Mapa[i][j] == 0){
+                    System.out.print("[ " + c + Mapa[i][j] + w + " ]");
                 } else {
-                    System.out.print("[ " + y + matriz[i][j] + w + " ]");
+                    System.out.print("[ " + y + Mapa[i][j] + w + " ]");
                 }
             }
             System.out.println();
@@ -94,7 +94,7 @@ public class aspirador {
 
     //Posiciona o aspirador em uma das pontas
     public static void posicionaAspirador() throws IOException, InterruptedException {
-        if (matriz[posicaoX][posicaoY] == 1) {
+        if (Mapa[posicaoX][posicaoY] == 1) {
             limpaPiso(posicaoX, posicaoY);
         }
         boolean naoChegou = true;
@@ -105,14 +105,14 @@ public class aspirador {
             } else if (posicaoY == aresta-1) {
                 //movimenta para cima
                 posicaoX--;
-                desenhandoMatriz();
+                desenhandoMapa();
             } else {
                 //movimenta para direita
                 posicaoY++;
-                desenhandoMatriz();
+                desenhandoMapa();
             }
 
-            if (matriz[posicaoX][posicaoY] == 1) {
+            if (Mapa[posicaoX][posicaoY] == 1) {
                 limpaPiso(posicaoX, posicaoY);
             }
         }
@@ -120,9 +120,9 @@ public class aspirador {
     }
 
     public static void limpaPiso(int x, int y) throws IOException, InterruptedException {
-        if(matriz[x][y] == 1){
-            matriz[x][y] = 0;
-            desenhandoMatriz();
+        if(Mapa[x][y] == 1){
+            Mapa[x][y] = 0;
+            desenhandoMapa();
             System.out.println("Limpo");
         }
     }
@@ -143,7 +143,7 @@ public class aspirador {
                     //movimenta para direita
                     posicaoY++;
                 }
-                desenhandoMatriz();
+                desenhandoMapa();
             }
         }
     }
